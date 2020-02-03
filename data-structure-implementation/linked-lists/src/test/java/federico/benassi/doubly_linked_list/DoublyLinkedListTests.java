@@ -1,7 +1,7 @@
 package federico.benassi.doubly_linked_list;
 
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.util.List;
 
