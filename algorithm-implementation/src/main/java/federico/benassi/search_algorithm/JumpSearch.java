@@ -1,4 +1,4 @@
-package federico.benassi.linear_search;
+package federico.benassi.search_algorithm;
 
 public class JumpSearch {
 
