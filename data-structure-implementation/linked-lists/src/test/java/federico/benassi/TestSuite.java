@@ -6,6 +6,7 @@ import federico.benassi.hash_table.HashTableTests;
 import federico.benassi.linked_list.LinkedListTests;
 import federico.benassi.queue.QueueTests;
 import federico.benassi.stack.StackTests;
+import federico.benassi.tree.BinarySearchTreeTests;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -17,7 +18,8 @@ import org.junit.runners.Suite.SuiteClasses;
         HashTableTests.class,
         LinkedListTests.class,
         QueueTests.class,
-        StackTests.class
+        StackTests.class,
+        BinarySearchTreeTests.class
 })
 public class TestSuite {
 }
