@@ -1,37 +1,13 @@
 package federico.benassi.queue;
 
-import federico.benassi.doubly_linked_list.DoublyLinkedList;
+public interface Queue<T> {
+    void enqueue(T value);
 
-public class Queue<T> {
-    private DoublyLinkedList<T> implementation;
+    T front();
 
-    public Queue(){
-        this.implementation = new DoublyLinkedList<>();
-    }
+    T dequeue();
 
-    public void enqueue(T value){
-        this.implementation.addLast(value);
-    }
+    boolean isEmpty();
 
-    public T front(){
-        return this.implementation.get(0);
-    }
-
-    public T dequeue(){
-        var toReturn = this.implementation.get(0);
-        this.implementation.removeFirst();
-        return toReturn;
-    }
-
-    public boolean isEmpty(){
-        return this.implementation.isEmpty();
-    }
-
-    public boolean isFull(){
-        return false;
-    }
-
-    public long getSize(){
-        return this.implementation.size();
-    }
+    long getSize();
 }
