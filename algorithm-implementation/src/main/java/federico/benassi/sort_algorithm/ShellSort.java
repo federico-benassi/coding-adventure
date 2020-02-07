@@ -2,27 +2,28 @@ package federico.benassi.sort_algorithm;
 
 import static federico.benassi.ComparableUtils.*;
 
-public class SelectionSort {
+public class ShellSort {
 
-    public static void selectionSort(Comparable[] arr){
-        for(int i = 0; i < arr.length; i++) {
-            Comparable min = arr[i];
-            int indexOfTheMin = i;
-            for (int j = i; j < arr.length; j++) {
-                if(less(arr[j], min)) {
-                    min = arr[j];
-                    indexOfTheMin = j;
+    public static void shellSort(Comparable[] arr) {
+        int sequence = 0;
+        int x = 0;
+        while (sequence < arr.length) sequence = 3 * x++ + 1;
+
+        while ((sequence = 3 * --x + 1) > 0) {
+            for (int i = sequence; i < arr.length; i++) {
+                for (int j = i; j > 0; j -= sequence) {
+                    if (less(arr[j], arr[j - 1])) {
+                        exchange(arr, j, j - 1);
+                    }
                 }
             }
-            exchange(arr, i, indexOfTheMin);
         }
     }
 
     public static void main(String[] args) {
-
         Integer[] arr = new Integer[]{2, 88, 77, 46, 28, 59, 26, 59, 17, 58};
         StringBuilder sb = new StringBuilder();
-        selectionSort(arr);
+        shellSort(arr);
         sb.append("[");
 
         for(Integer i : arr)

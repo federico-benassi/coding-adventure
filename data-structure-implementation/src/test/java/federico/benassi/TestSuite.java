@@ -4,6 +4,7 @@ import federico.benassi.array_list.ArrayListTests;
 import federico.benassi.doubly_linked_list.DoublyLinkedListTests;
 import federico.benassi.hash_table.HashTableTests;
 import federico.benassi.linked_list.LinkedListTests;
+import federico.benassi.priority_queue.PriorityQueueTests;
 import federico.benassi.queue.*;
 import federico.benassi.stack.GenericStackWithLinkedListImplementationTests;
 import federico.benassi.stack.GenericStackWithArrayImplementationTests;
@@ -26,6 +27,7 @@ import org.junit.runners.Suite.SuiteClasses;
         GenericStackWithLinkedListImplementationTests.class,
         GenericStackWithArrayImplementationTests.class,
         GenericStackWithResizingArrayImplementionTests.class,
+        PriorityQueueTests.class,
         BinarySearchTreeTests.class,
         UnionQuickFindTests.class
 })

@@ -1,40 +1,77 @@
 package federico.benassi.sort_algorithm;
 
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 
-public class QuickSort {
-    public static int[] quickSort(int[] arr){
-        if(arr.length <= 1) return arr;
-        else{
-            var pivot = arr[arr.length / 2];
-            var leftArr = quickSort(Arrays.stream(arr).filter(item -> item < pivot).toArray());
-            var rightArr = quickSort(Arrays.stream(arr).filter(item -> item > pivot).toArray());
+import static federico.benassi.ComparableUtils.exchange;
+import static federico.benassi.ComparableUtils.less;
 
-            var finalArr = new int[leftArr.length + 1 + rightArr.length];
-            for(int i = 0; i < finalArr.length; i++){
-                if(i < leftArr.length){
-                    finalArr[i] = leftArr[i];
-                } else if(i == leftArr.length){
-                    finalArr[i] = pivot;
+public class QuickSort {
+
+    private static final int CUTOFF = 10;
+
+    public static void quickSort(Comparable[] arr){
+        Shuffle.shuffle(arr);
+        sort(arr, 0, arr.length - 1);
+    }
+
+    public static void sort(Comparable[] arr, int lo, int hi){
+        if(hi <= lo + CUTOFF - 1) {
+            insertionSort(arr, lo, hi);
+            return;
+        }
+        var indexOfPartiotion = partition(arr, lo, hi);
+        sort(arr, lo, indexOfPartiotion - 1);
+        sort(arr, indexOfPartiotion + 1, hi);
+    }
+
+    private static void insertionSort(Comparable[] arr, int lo, int hi){
+        for(int i = lo; i < hi; i++){
+            for(int j = i; j > lo; j--){
+                if(less(arr[j], arr[j - 1])){
+                    exchange(arr, j, j - 1);
                 } else {
-                    finalArr[i] = rightArr[i - leftArr.length - 1];
+                    break;
                 }
             }
-            return finalArr;
         }
     }
 
-    public static void main(String[] args) {
-        int[] arr = new int[]{2, 88, 77, 46, 28, 59, 26, 59, 17, 58};
-        StringBuilder sb = new StringBuilder();
+    public static int partition(Comparable[] arr, int lo, int hi){
+        int i = lo, j = hi + 1;
+        while(true){
+            while(less(arr[++i], arr[lo])){
+                if(i == hi) break;
+            }
+            while(less(arr[lo], arr[--j])){
+                if(j == lo) break;
+            }
+            if( i >= j ) break;
+            exchange(arr, i, j);
+        }
 
-        sb.append("[");
+        exchange(arr, lo, j);
+        return j;
+    }
 
-        for(int i : quickSort(arr))
-            sb.append(i).append(", ");
+    public static void main(String[] args) throws IOException {
+        int[] arr = new int[1_000_000];
+        for(int i = arr.length; i > 0; i--){
+            arr[i - 1] = i;
+        }
 
-        sb.delete(sb.length() - 2, sb.length()).append("]");
+        // quickSort(arr);
+        Arrays.sort(arr);
+        BufferedWriter bw = new BufferedWriter(new FileWriter(new File("output.txt")));
+        for(int i : arr) {
+            bw.write("" + i);
+            bw.newLine();
+        }
 
-        System.out.println(sb.toString());
+        bw.close();
     }
 }

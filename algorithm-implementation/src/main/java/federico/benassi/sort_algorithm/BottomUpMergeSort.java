@@ -2,25 +2,20 @@ package federico.benassi.sort_algorithm;
 
 import com.google.common.base.Stopwatch;
 
-import static federico.benassi.ComparableUtils.*;
+import static federico.benassi.ComparableUtils.less;
 
-public class MergeSort {
 
-    private static final int CUTOFF = 7;
+public class BottomUpMergeSort {
 
     public static void mergeSort(Comparable[] arr){
-        sort(arr, new Comparable[arr.length], 0, arr.length - 1);
-    }
 
-    private static void sort(Comparable[] a, Comparable[] aux, int lo, int hi){
-        if (hi <= lo + CUTOFF - 1) {
-            insertionSort(a, lo, hi);
-            return;
+        Comparable[] aux = new Comparable[arr.length];
+        for(int size = 1; size < arr.length; size += size){
+            for(int i = 0; i < arr.length - size; i += size + size){
+                merge(arr, aux, i, i + size - 1, Math.min(i + size + size - 1, arr.length - 1));
+            }
         }
-        int mid = lo + (hi - lo) / 2;
-        sort(a, aux, lo, mid);
-        sort(a, aux, mid + 1, hi);
-        merge(a, aux, lo, mid, hi);
+
     }
 
     private static void merge(Comparable[] a, Comparable[] aux,  int lo, int mid, int hi){
@@ -35,18 +30,6 @@ public class MergeSort {
             else if (j > hi)            a[k] = aux[i++];
             else if (less(aux[j], aux[i]))  a[k] = aux[j++];
             else                        a[k] = aux[i++];
-        }
-    }
-
-    private static void insertionSort(Comparable[] arr, int lo, int hi){
-        for(int i = lo; i < hi; i++){
-            for(int j = i; j > lo; j--){
-                if(less(arr[j], arr[j - 1])){
-                    exchange(arr, j, j - 1);
-                } else {
-                    break;
-                }
-            }
         }
     }
 
