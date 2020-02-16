@@ -2,18 +2,19 @@ package federico.benassi.algorithm.sort;
 
 import static federico.benassi.ComparableUtils.*;
 
-public class ShellSort {
+public class ShellSort<T extends Comparable<T>> implements Sort<T> {
 
-    public static void shellSort(Comparable[] arr) {
+    @Override
+    public void sort(Comparable<T>[] array) {
         int sequence = 0;
         int x = 0;
-        while (sequence < arr.length) sequence = 3 * x++ + 1;
+        while (sequence < array.length) sequence = 3 * x++ + 1;
 
         while ((sequence = 3 * --x + 1) > 0) {
-            for (int i = sequence; i < arr.length; i++) {
+            for (int i = sequence; i < array.length; i++) {
                 for (int j = i; j > 0; j -= sequence) {
-                    if (less(arr[j], arr[j - 1])) {
-                        exchange(arr, j, j - 1);
+                    if (less(array[j], array[j - 1])) {
+                        exchange(array, j, j - 1);
                     }
                 }
             }

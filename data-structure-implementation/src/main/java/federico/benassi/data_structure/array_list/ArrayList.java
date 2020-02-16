@@ -3,7 +3,6 @@ package federico.benassi.data_structure.array_list;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static federico.benassi.algorithm.search.LinearSearch.linearSearch;
 
 public class ArrayList<T> {
     private final int DEFAULT_SIZE = 10;

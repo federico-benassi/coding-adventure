@@ -1,10 +1,11 @@
 package federico.benassi.algorithm.search;
 
+import federico.benassi.algorithm.sort.InsertionSort;
+import federico.benassi.algorithm.sort.Sort;
 import org.junit.Test;
 
 import java.util.Arrays;
 
-import static federico.benassi.algorithm.sort.InsertionSort.insertionSort;
 import static org.junit.Assert.*;
 import static federico.benassi.TestUtilities.SMALL_INTEGER_UNIQUE_ELEMENTS_ARRAY;
 
@@ -14,8 +15,11 @@ public class JumpSearchTests {
     public void jumpSearchShouldFindTheElement(){
         var copy = Arrays
                 .copyOf(SMALL_INTEGER_UNIQUE_ELEMENTS_ARRAY, SMALL_INTEGER_UNIQUE_ELEMENTS_ARRAY.length);
-        insertionSort(copy);
-        assertEquals(2, JumpSearch.jumpSearch(copy, 3));
+        Sort<Integer> insertionSort = new InsertionSort<>();
+        insertionSort.sort(copy);
+        Search<Integer> jumpSearch = new SearchFactory<Integer>()
+                .getAlgorithm(SearchAlgorithm.JUMP_SEARCH);
+        assertEquals(3, jumpSearch.search(copy, 3));
     }
 
 }

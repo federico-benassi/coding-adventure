@@ -1,7 +1,7 @@
 package federico.benassi.algorithm.sort;
 
+// Works only with integers
 public class CountingSort {
-
 
     public static void countingSort(int[] arr){
         int max = arr[0];

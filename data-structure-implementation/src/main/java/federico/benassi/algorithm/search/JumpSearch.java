@@ -1,15 +1,15 @@
 package federico.benassi.algorithm.search;
 
-public class JumpSearch {
+public class JumpSearch<T extends Comparable<T>> implements Search<T>{
 
-    // Work only on sorted arrays and worst case O(n/m)
-    public static int jumpSearch(Comparable[] arr, Comparable elementToBeFound){
-        int m = (int) Math.sqrt(arr.length);
+    @Override
+    public int search(Comparable<T>[] array, T element) {
+        int m = (int) Math.sqrt(array.length);
 
-        for(int i = 0; i < arr.length; i += m){
-            if(arr[i].compareTo(elementToBeFound) > 0){
+        for(int i = 0; i < array.length; i += m){
+            if(array[i].compareTo(element) > 0){
                 for(int j = i - m; j < i; j++){
-                    if(arr[j] == elementToBeFound) return j;
+                    if(array[j] == element) return j;
                 }
                 return -1;
             }

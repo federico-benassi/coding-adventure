@@ -6,8 +6,6 @@ import java.util.Arrays;
 
 import static federico.benassi.TestUtilities.SMALL_INTEGER_UNIQUE_ELEMENTS_ARRAY;
 import static federico.benassi.TestUtilities.isSorted;
-import static federico.benassi.algorithm.sort.MergeSort.bottomUpMergeSort;
-import static federico.benassi.algorithm.sort.MergeSort.mergeSort;
 import static org.junit.Assert.assertTrue;
 
 public class MergeSortTests {
@@ -16,7 +14,9 @@ public class MergeSortTests {
     public void bottomUpMergeSortShouldSortTheArray(){
         var copy = Arrays
                 .copyOf(SMALL_INTEGER_UNIQUE_ELEMENTS_ARRAY, SMALL_INTEGER_UNIQUE_ELEMENTS_ARRAY.length);
-        bottomUpMergeSort(copy);
+        Sort<Integer> bottomUpMergeSort = new SortFactory<Integer>()
+                .getAlgorithm(SortAlgorithm.BOTTOM_UP_MERGE_SORT);
+        bottomUpMergeSort.sort(copy);
         assertTrue(isSorted(copy));
     }
 
@@ -24,7 +24,9 @@ public class MergeSortTests {
     public void mergeSortShouldSortTheArray(){
         var copy = Arrays
                 .copyOf(SMALL_INTEGER_UNIQUE_ELEMENTS_ARRAY, SMALL_INTEGER_UNIQUE_ELEMENTS_ARRAY.length);
-        mergeSort(copy);
+        Sort<Integer> mergeSort = new SortFactory<Integer>()
+                .getAlgorithm(SortAlgorithm.MERGE_SORT);
+        mergeSort.sort(copy);
         assertTrue(isSorted(copy));
     }
 }

@@ -6,7 +6,6 @@ import java.util.Arrays;
 
 import static federico.benassi.TestUtilities.SMALL_INTEGER_UNIQUE_ELEMENTS_ARRAY;
 import static federico.benassi.TestUtilities.isSorted;
-import static federico.benassi.algorithm.sort.SelectionSort.selectionSort;
 import static org.junit.Assert.assertTrue;
 
 public class SelectionSortTests {
@@ -15,7 +14,9 @@ public class SelectionSortTests {
     public void selectionSortShouldSortTheArray(){
         var copy = Arrays
                 .copyOf(SMALL_INTEGER_UNIQUE_ELEMENTS_ARRAY, SMALL_INTEGER_UNIQUE_ELEMENTS_ARRAY.length);
-        selectionSort(copy);
+        Sort<Integer> selectionSort = new SortFactory<Integer>()
+                .getAlgorithm(SortAlgorithm.SELECTION_SORT);
+        selectionSort.sort(copy);
         assertTrue(isSorted(copy));
     }
 }

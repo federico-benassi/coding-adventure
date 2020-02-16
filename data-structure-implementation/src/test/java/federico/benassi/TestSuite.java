@@ -45,6 +45,7 @@ import org.junit.runners.Suite.SuiteClasses;
         SelectionSortTests.class,
         ShellSortTests.class,
         ShuffleTests.class,
+        HeapSortTests.class
 })
 public class TestSuite {
 }

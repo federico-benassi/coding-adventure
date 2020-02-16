@@ -2,19 +2,20 @@ package federico.benassi.algorithm.sort;
 
 import static federico.benassi.ComparableUtils.*;
 
-public class SelectionSort {
+public class SelectionSort<T extends Comparable<T>> implements Sort<T> {
 
-    public static void selectionSort(Comparable[] arr){
-        for(int i = 0; i < arr.length; i++) {
-            Comparable min = arr[i];
+    @Override
+    public void sort(Comparable<T>[] array) {
+        for(int i = 0; i < array.length; i++) {
+            Comparable min = array[i];
             int indexOfTheMin = i;
-            for (int j = i; j < arr.length; j++) {
-                if(less(arr[j], min)) {
-                    min = arr[j];
+            for (int j = i; j < array.length; j++) {
+                if(less(array[j], min)) {
+                    min = array[j];
                     indexOfTheMin = j;
                 }
             }
-            exchange(arr, i, indexOfTheMin);
+            exchange(array, i, indexOfTheMin);
         }
     }
 }

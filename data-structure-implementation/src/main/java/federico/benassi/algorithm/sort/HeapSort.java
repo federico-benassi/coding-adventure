@@ -1,7 +1,8 @@
-package federico.benassi.data_structure.priority_queue;
+package federico.benassi.algorithm.sort;
 
-public class HeapSort {
-    public static void sort(Comparable[] arr){
+public class HeapSort<T extends Comparable<T>> implements Sort<T> {
+
+    public void sort(Comparable[] arr){
         int length = arr.length;
         for(int k = length / 2; k >= 1; k--)
             sink(arr, k, length);
@@ -11,7 +12,7 @@ public class HeapSort {
         }
     }
 
-    private static void sink(Comparable[] arr, int k, int length){
+    private void sink(Comparable[] arr, int k, int length){
         while(2 * k <= length){
             int j = 2 * k;
             if(j < length && less(arr, j, j + 1)) j++;
@@ -29,15 +30,5 @@ public class HeapSort {
         var temp = arr[k - 1];
         arr[k - 1] = arr[j - 1];
         arr[j - 1] = temp;
-    }
-
-    public static void main(String[] args) {
-        Integer[] arr = new Integer[]{5, 8, 2, 0, 43, 38, 2, 92};
-
-        sort(arr);
-
-        for(Integer i : arr){
-            System.out.print(i + ", ");
-        }
     }
 }
